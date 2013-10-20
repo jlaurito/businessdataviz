@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>
+  <title>My Dashboard's Title</title>
+
+
+
+  <!--- Using Google Charts for visualization, bootstrap to set up page -->
+
+  <script type="text/javascript" src="//www.google.com/jsapi"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+  </script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
+  </script>
+  <script type="text/JavaScript">
+    function timedRefresh(ms) {setTimeout("location.reload(true);",ms);}
+  </script>
+  <script type="text/javascript">google.load('visualization', '1');</script>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+
+
+  <!--- First Chart, simple, direct pull of data -->
+
+  <script type="text/javascript">
+    function chart1() {
+      
+      // put the source's key and the data range here
+      var gKey = "0AsJDXPO0ATU2dGg2cDk1bXpoMFVhYXNFY2FDdEFvcXc";
+      var gRng = "A1:B49";
+
+      var wrapper = new google.visualization.ChartWrapper({
+          dataSourceUrl: 'http://spreadsheets.google.com/tq?key=' + gKey +
+                         '&range=' + gRng + '&pub=1',
+          
+          // change the chart type and options here
+          chartType: 'LineChart',
+          containerId: 'chart1',
+          options: {'title': 'User Growth Q/Q',
+                  'titleTextStyle': {'fontSize':32},
+                  'legend': 'none'}
+        });
+        wrapper.draw();
+      };
+
+      google.setOnLoadCallback(chart1);
+   </script>
+
+
+
+  <!--- Second Chart, pulling two columns not next to each other -->
+
+  <script type="text/javascript">
+    function pullDataFromSpreadsheet() {
+
+      // put the source's key here
+      var gKey = "0AsJDXPO0ATU2dGg2cDk1bXpoMFVhYXNFY2FDdEFvcXc";
+
+      var query = new google.visualization.Query('http://spreadsheets.google.com/tq?key=' + gKey + '&pub=1'
+        );
+
+      //specify what you want returned and which chart it goes to
+      query.setQuery('select A, C where C > 1');
+      query.send(chart2);
+    };
+
+
+    function chart2(response) {
+      var wrapper = new google.visualization.ChartWrapper({
+        dataTable: response.getDataTable(),
+
+        // change the chart type and options here
+        
+        chartType: 'AreaChart',
+        containerId: 'chart2',
+        options: {
+                  'title': 'Timeline Views / MAU',
+                  'titleTextStyle': {'fontSize':32},
+                  'legend': 'none',
+                  'colors': ['red','#004411']
+              }
+      });
+
+      wrapper.draw();
+    };
+    google.setOnLoadCallback(pullDataFromSpreadsheet);
+  </script>
+
+
+
+  <!--- Third Chart, Annotated -->
+
+  <script type="text/javascript">
+    function pullDataFromSpreadsheet() {
+
+      // put the source's key here
+      var gKey = "0AsJDXPO0ATU2dGg2cDk1bXpoMFVhYXNFY2FDdEFvcXc";
+
+      var query = new google.visualization.Query('http://spreadsheets.google.com/tq?key=' + gKey + '&pub=1'
+        );
+
+      //specify what you want returned and which chart it goes to
+      query.setQuery('select A, D, E, G where D > 0');
+      query.send(chart3);
+    };
+
+
+    function chart3(response) {
+      var wrapper = new google.visualization.ChartWrapper({
+        dataTable: response.getDataTable(),
+
+        // change the chart type and options here
+        
+        chartType: 'AnnotatedTimeLine',
+        containerId: 'chart3',
+        options: {'displayAnnotations': true,
+                  'fontSize': 32}
+      });
+
+      wrapper.draw();
+    };
+    google.setOnLoadCallback(pullDataFromSpreadsheet);
+  </script>
+
+</head>
+
+
+<!-- now draw the page -->
+<!-- timedRefresh counts milliseconds until the screen refreshes -->
+
+<body onload="JavaScript:timedRefresh(30000);">
+  <h1>Current Status:</h1>
+    
+    <!-- Put Top Row Charts Here -->
+    <div class="row-fluid">
+      <div class="span6">
+        <div id='chart1' style='height:600px;'></div>
+      </div>
+      <div class="span6">
+        <div id='chart2' style='height:600px;'></div>
+      </div>
+    </div>
+
+    <!-- Put Bottom Row Charts Here -->
+    <div class="row-fluid">
+      <div class="span1"></div>
+      <div class="span6">
+        <h3>Revenue and Cost Per 1000 Timeline Views</h3>
+        <div id='chart3' style='height:600px;'></div>
+      </div>
+
+    </div>
+
+</body>
+</html>
