@@ -5,17 +5,17 @@
 
 
   <!--- Using Google Charts for visualization, bootstrap to set up page -->
-
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="//www.google.com/jsapi"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-  </script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
-  </script>
-  <script type="text/JavaScript">
-    function timedRefresh(ms) {setTimeout("location.reload(true);",ms);}
-  </script>
-  <script type="text/javascript">google.load('visualization', '1');</script>
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
+  <!--- which charts to load? -->
+  <script type="text/javascript">google.load('visualization', '1', {'packages':['annotatedtimeline', 'areaChart']});</script>
+  
+
+
+  <script type="text/JavaScript">function timedRefresh(ms) {setTimeout("location.reload(true);",ms);}</script>
 
 
 
@@ -26,14 +26,14 @@
       
       // put the source's key and the data range here
       var gKey = "0AsJDXPO0ATU2dGg2cDk1bXpoMFVhYXNFY2FDdEFvcXc";
-      var gRng = "A1:B49";
+      var gRng = "A1:B99";
 
       var wrapper = new google.visualization.ChartWrapper({
           dataSourceUrl: 'http://spreadsheets.google.com/tq?key=' + gKey +
                          '&range=' + gRng + '&pub=1',
           
           // change the chart type and options here
-          chartType: 'LineChart',
+          chartType: 'AreaChart',
           containerId: 'chart1',
           options: {'title': 'User Growth Q/Q',
                   'titleTextStyle': {'fontSize':32},
@@ -58,7 +58,7 @@
       var query = new google.visualization.Query('http://spreadsheets.google.com/tq?key=' + gKey + '&pub=1'
         );
 
-      //specify what you want returned and which chart it goes to
+      //specify what you want returned and which function to call
       query.setQuery('select A, C where C > 1');
       query.send(chart2);
     };
@@ -90,7 +90,7 @@
   <!--- Third Chart, Annotated -->
 
   <script type="text/javascript">
-    function pullDataFromSpreadsheet() {
+    function annotatedChart() {
 
       // put the source's key here
       var gKey = "0AsJDXPO0ATU2dGg2cDk1bXpoMFVhYXNFY2FDdEFvcXc";
@@ -98,7 +98,7 @@
       var query = new google.visualization.Query('http://spreadsheets.google.com/tq?key=' + gKey + '&pub=1'
         );
 
-      //specify what you want returned and which chart it goes to
+      //specify what you want returned and which function to call
       query.setQuery('select A, D, E, G where D > 0');
       query.send(chart3);
     };
@@ -109,16 +109,15 @@
         dataTable: response.getDataTable(),
 
         // change the chart type and options here
-        
-        chartType: 'AnnotatedTimeLine',
         containerId: 'chart3',
+        chartType: 'AnnotatedTimeLine',
         options: {'displayAnnotations': true,
                   'fontSize': 32}
       });
 
       wrapper.draw();
     };
-    google.setOnLoadCallback(pullDataFromSpreadsheet);
+    google.setOnLoadCallback(annotatedChart);
   </script>
 
 </head>
@@ -127,7 +126,7 @@
 <!-- now draw the page -->
 <!-- timedRefresh counts milliseconds until the screen refreshes -->
 
-<body onload="JavaScript:timedRefresh(30000);">
+<body onload="JavaScript:timedRefresh(3000000);">
   <h1>Current Status:</h1>
     
     <!-- Put Top Row Charts Here -->
