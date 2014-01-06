@@ -9,14 +9,12 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="//www.google.com/jsapi"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  
+
   <!--- which charts to load? -->
   <script type="text/javascript">google.load('visualization', '1', {'packages':['annotatedtimeline', 'areaChart']});</script>
   
-
-
+  <!--- set timeout -->
   <script type="text/JavaScript">function timedRefresh(ms) {setTimeout("location.reload(true);",ms);}</script>
-
 
 
   <!--- First Chart, simple, direct pull of data -->
@@ -126,7 +124,7 @@
 <!-- now draw the page -->
 <!-- timedRefresh counts milliseconds until the screen refreshes -->
 
-<body onload="JavaScript:timedRefresh(3000000);">
+<body onload="JavaScript:timedRefresh(30000);">
   <h1>Current Status:</h1>
     
     <!-- Put Top Row Charts Here -->
