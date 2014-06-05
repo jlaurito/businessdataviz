@@ -9,7 +9,7 @@ This is a big class and I want to make sure you get value out of it. If there ar
 
 ### Part 1 ###
 
-In class, I gave examples of two interactive visualizations, one on the US banking system [using d3](http://jlaurito.github.io/us_bank_map/mapping_us_banks.html), and one on startup revenue using the [Google Viz API](http://blog.joshlaurito.com/inc5000.html). You can see either using the links above: the codebases are [here (d3)](https://github.com/jlaurito/jlaurito.github.io/tree/master/us_bank_map) and [here (Google Viz)](https://github.com/jlaurito/inc5000).
+In class, I gave examples of two interactive visualizations, one on the US banking system [using d3](http://jlaurito.github.io/us_bank_map/mapping_us_banks.html), and one on startup revenue using the [Google Viz API](http://blog.joshlaurito.com/inc5000.html). You can see either using the links above: the codebases are [here (d3)](https://github.com/jlaurito/jlaurito.github.io/tree/master/us_bank_map) and [here (Google Viz)](https://github.com/jlaurito/inc5000). I also mentioned [my class at CUNY](http://bit.ly/cunyIS608) which you may want to check out if you're interested in learning more.
 
 Dave McClure's influential ARRR blog post is [here](http://500hats.typepad.com/500blogs/2007/06/internet-market.html).
 
